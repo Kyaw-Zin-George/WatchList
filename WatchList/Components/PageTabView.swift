@@ -20,6 +20,7 @@ struct PageTabView: View {
             Text(description)
                 .font(.title.weight(.light))
                 .fontWidth(.compressed)
+                .multilineTextAlignment(.center)
         }
     }
 }
