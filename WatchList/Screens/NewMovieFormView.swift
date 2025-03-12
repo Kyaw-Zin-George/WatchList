@@ -7,11 +7,21 @@
 
 import SwiftUI
 
+
 struct NewMovieFormView: View {
     //MARK: PROPERTIES
+    @Environment(\.modelContext) var modelContext
+    @Environment(\.dismiss) var dismiss
     @State private var title: String = ""
     @State private var selectedGenre: Genre = .kids
     
+    //MARK: FUNCTIONS
+    private func addNewMovie(){
+        let newMovie = Movie(title: title, genre: selectedGenre)
+        modelContext.insert(newMovie)
+        title = ""
+        selectedGenre = .kids
+    }
     var body: some View {
         List {
             //MARK: HEADER
@@ -33,7 +43,8 @@ struct NewMovieFormView: View {
             }
             //MARK: SAFE BUTTON
             Button{
-                
+                addNewMovie()
+                dismiss()
             }label: {
                 Text("Save")
                     .font(.title2.weight(.medium))
@@ -43,7 +54,7 @@ struct NewMovieFormView: View {
             
             //MARK: CANCEL BUTTON
             Button{
-                
+                dismiss()
             }label: {
                 Text("Cancel")
                     .font(.title2)
