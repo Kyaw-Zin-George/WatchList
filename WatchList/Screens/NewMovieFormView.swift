@@ -31,6 +31,24 @@ struct NewMovieFormView: View {
                         .tag(genre)
                 }
             }
+            //MARK: SAFE BUTTON
+            Button{
+                
+            }label: {
+                Text("Save")
+                    .font(.title2.weight(.medium))
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.borderedProminent)
+            
+            //MARK: CANCEL BUTTON
+            Button{
+                
+            }label: {
+                Text("Cancel")
+                    .font(.title2)
+                    .frame(maxWidth: .infinity)
+            }
             
         }
     }
