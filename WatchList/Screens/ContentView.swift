@@ -25,6 +25,19 @@ struct ContentView: View {
                 EmptyView()
             }
         }
+        //MARK: SAFE AREA
+        .safeAreaInset(edge: .bottom,alignment: .center) {
+            //New Movie Button
+            Button{
+                isSheetPresented.toggle()
+            }label: {
+                ButtonImageView(symbolName: "plus.circle.fill")
+            }
+        }//:Safe area
+        .sheet(isPresented: $isSheetPresented) {
+            NewMovieFormView()
+        }
+
     }
 }
 
