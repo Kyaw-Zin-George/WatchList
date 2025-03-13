@@ -10,7 +10,14 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     @Query private var movies: [Movie]
+    
     @State private var isSheetPresented: Bool = false
+    @State private var randedMovie: String = ""
+    @State private var isShowingAlert: Bool = false
+    //MARK: FUNCTION
+    func randomMovieGenerator(){
+        randedMovie = movies.randomElement()!.title
+    }
     var body: some View {
         List{
             if !movies.isEmpty {
@@ -65,11 +72,30 @@ struct ContentView: View {
         //MARK: SAFE AREA
         .safeAreaInset(edge: .bottom,alignment: .center) {
             //New Movie Button
-            Button{
-                isSheetPresented.toggle()
-            }label: {
-                ButtonImageView(symbolName: "plus.circle.fill")
-            }
+            HStack {
+                Button{
+                    randomMovieGenerator()
+                    isShowingAlert = true
+                }label: {
+                    ButtonImageView(symbolName: arrowTriHeadCircle)
+                }
+                .alert(randedMovie, isPresented: $isShowingAlert){
+                    Button("Ok", role: .cancel){
+                        
+                    }
+                    .accessibilityLabel("Random Movie")
+                    .sensoryFeedback(.success, trigger: isShowingAlert)
+                }
+                
+                Spacer()
+                Button{
+                    isSheetPresented.toggle()
+                }label: {
+                    ButtonImageView(symbolName: "plus.circle.fill")
+                }
+                .accessibilityLabel("New Movie")
+                .sensoryFeedback(.success, trigger: isSheetPresented)
+            }.padding(.horizontal)
         }//:Safe area
         .sheet(isPresented: $isSheetPresented) {
             NewMovieFormView()

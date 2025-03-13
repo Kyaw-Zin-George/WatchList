@@ -8,3 +8,5 @@
 import Foundation
 
 let movieClapper = "movieclapper"
+
+let arrowTriHeadCircle = "arrow.trianglehead.2.clockwise.rotate.90.circle.fill"
