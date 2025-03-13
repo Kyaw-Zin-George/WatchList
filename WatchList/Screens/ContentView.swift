@@ -10,6 +10,7 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     @Query private var movies: [Movie]
+    @State private var isSheetPresented: Bool = false
     var body: some View {
         List{
             ForEach(movies){ movie in
@@ -40,7 +41,10 @@ struct ContentView: View {
 
     }
 }
-
-#Preview {
+#Preview("ListView"){
+    ContentView()
+        .modelContainer(Movie.preview)
+}
+#Preview("Empty View") {
     ContentView()
 }
