@@ -12,7 +12,13 @@ struct ContentView: View {
     @Query private var movies: [Movie]
     var body: some View {
         List{
-            
+            ForEach(movies){ movie in
+                HStack{
+                    Text(movie.title)
+                    Spacer()
+                    Text(movie.genre.name)
+                }
+            }
         }
         .overlay{
             if movies.isEmpty{
