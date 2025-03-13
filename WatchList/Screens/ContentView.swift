@@ -19,6 +19,15 @@ struct ContentView: View {
                     Spacer()
                     Text(movie.genre.name)
                 }
+                .swipeActions {
+                    Button(role: .destructive){
+                        withAnimation {
+                            modelContext.delete(movie)
+                        }
+                    }label: {
+                        Label("Delete", systemImage: "trash")
+                    }
+                }
             }
         }
         .overlay{
